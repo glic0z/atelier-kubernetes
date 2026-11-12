@@ -52,14 +52,14 @@ site-75775484b-n5gd6   1/1     Running   k3d-lab-agent-1
 ## Exercice 6 — Portainer & Mario
 
 12. URL publique de votre Mario :
-    > Non disponible : cluster exécuté en local (pas de Codespace), Mario accessible via `kubectl port-forward svc/mario 8585:85`.
+    > https://silver-dollop-7xr55655469hr44p-8585.app.github.dev/
 13. Retrouvez le Deployment `mario` en ligne de commande. Portainer et `kubectl` parlent-ils au même composant ? Lequel ?
     > Oui, `kubectl get deploy mario -o yaml` le montre : c'est un Deployment standard. Portainer (qui tourne dans le cluster avec un ServiceAccount) et kubectl appellent le même composant, l'API Server de Kubernetes. La seule différence : Portainer ajoute des labels `io.portainer.kubernetes.application.*` (owner: admin, stackid: 1) et n'ajoute pas l'annotation `last-applied-configuration` de `kubectl apply`. Mario a été déployé via l'éditeur web de Portainer (compte admin créé avec le setup token des logs).
 
 ## Bonus (facultatif)
 
 14. Bonus réalisés et remarques :
-    > A (Ingress Traefik sur le port 8081, HTTP 200 avec la page), B (readinessProbe + requests/limits), C (drain/uncordon de `k3d-lab-agent-0` : les pods sont replanifiés sur les autres nœuds et ne reviennent pas tout seuls après `uncordon`, le scheduler ne déplace pas des pods déjà placés). Cluster monté en local (k3d sur Docker Desktop) et non dans un Codespace.
+    > A (Ingress Traefik sur le port 8081, HTTP 200 avec la page), B (readinessProbe + requests/limits), C (drain/uncordon de `k3d-lab-agent-0` : les pods sont replanifiés sur les autres nœuds et ne reviennent pas tout seuls après `uncordon`, le scheduler ne déplace pas des pods déjà placés).
 
 ---
 
