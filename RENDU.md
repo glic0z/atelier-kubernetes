@@ -54,7 +54,7 @@ site-75775484b-n5gd6   1/1     Running   k3d-lab-agent-1
 12. URL publique de votre Mario :
     > Non disponible : cluster exécuté en local (pas de Codespace), Mario accessible via `kubectl port-forward svc/mario 8585:85`.
 13. Retrouvez le Deployment `mario` en ligne de commande. Portainer et `kubectl` parlent-ils au même composant ? Lequel ?
-    > Même composant : l'API Server de Kubernetes. Portainer (qui tourne dans le cluster avec un ServiceAccount) et kubectl l'appellent tous les deux ; le Deployment est donc un objet standard, identique (seule l'annotation `last-applied-configuration` indique l'outil).
+    > Oui, `kubectl get deploy mario -o yaml` le montre : c'est un Deployment standard. Portainer (qui tourne dans le cluster avec un ServiceAccount) et kubectl appellent le même composant, l'API Server de Kubernetes. La seule différence : Portainer ajoute des labels `io.portainer.kubernetes.application.*` (owner: admin, stackid: 1) et n'ajoute pas l'annotation `last-applied-configuration` de `kubectl apply`. Mario a été déployé via l'éditeur web de Portainer (compte admin créé avec le setup token des logs).
 
 ## Bonus (facultatif)
 
